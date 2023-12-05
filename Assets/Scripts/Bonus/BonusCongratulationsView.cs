@@ -32,6 +32,5 @@ public class BonusCongratulationsView : MonoBehaviour
 
 public struct DailyBonusViewData
 {
-    public string DayNumber;
-    public int TicketsCount;
+    public int DayNumber, TicketsCount;
 }
