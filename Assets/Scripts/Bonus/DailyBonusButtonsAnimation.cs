@@ -8,8 +8,9 @@ public class DailyBonusButtonsAnimation : MonoBehaviour
    private List<Transform> _buttons = new List<Transform>();
     [SerializeField] private float _delay;
 
-    private void Awake()
+    private void OnEnable()
     {
+        _buttons.Clear();
         for(int i = 0; i < transform.childCount; i++)
         {
             _buttons.Add(transform.GetChild(i));
@@ -18,10 +19,18 @@ public class DailyBonusButtonsAnimation : MonoBehaviour
         float delay = 0;
         foreach(Transform b in _buttons)
         {
-            b.localScale = Vector3.zero;
+            b.DOScale(Vector3.zero, 0); 
             b.DOScale(Vector3.one, .5f).SetDelay(delay+=_delay);
         }
         
     }
-    
+
+    private void OnDisable()
+    {
+        foreach (Transform b in _buttons)
+        {
+            b.DOScale(Vector3.zero, 0);
+        }
+    }
+
 }

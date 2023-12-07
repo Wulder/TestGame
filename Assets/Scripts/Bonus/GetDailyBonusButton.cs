@@ -28,15 +28,20 @@ public class GetDailyBonusButton : MonoBehaviour
    
     private void OnEnable()
     {
-      
         _button.onClick.AddListener(OnClick);
+        _button.onClick.AddListener(GiveTickets);
     }
 
     private void OnDisable()
     {
         _button.onClick.RemoveListener(OnClick);
+        _button.onClick.RemoveListener(GiveTickets);
     }
 
+    void GiveTickets()
+    {
+        UserData.Instance.AddTickets(_ticketsCount);
+    }
     void OnClick()
     {
         DailyBonusManager.Singleton.ShowCongratulations(new DailyBonusViewData() { DayNumber = _dayNumber, TicketsCount = _ticketsCount });

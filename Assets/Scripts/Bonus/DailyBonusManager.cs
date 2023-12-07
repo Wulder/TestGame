@@ -12,6 +12,8 @@ public class DailyBonusManager : MonoBehaviour
     [SerializeField] private GameObject _bonusGettingView, _background;
     [SerializeField] private BonusCongratulationsView _bonusCongratulationsView;
 
+    [SerializeField] private List<GetDailyBonusButton> _bonusButtons  = new List<GetDailyBonusButton>();
+
     private GameObject _currentPanel;
     private bool _isShowing;
 
@@ -23,6 +25,7 @@ public class DailyBonusManager : MonoBehaviour
         Hide();
     }
 
+    #region WindowPopup
     void ShowPanel(GameObject panel)
     {
         if (_currentPanel != null) { _currentPanel.SetActive(false); }
@@ -30,7 +33,6 @@ public class DailyBonusManager : MonoBehaviour
         _currentPanel = panel;
         panel.SetActive(true);
     }
-
     public void Show()
     {
         if(_isShowing) return;
@@ -65,4 +67,9 @@ public class DailyBonusManager : MonoBehaviour
             _currentPanel = null;
         }
     }
+    #endregion
+
+
+    
+
 }
