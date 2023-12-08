@@ -45,7 +45,10 @@ public class UserData : Singletone<UserData>
         else
             OnDataUpdated?.Invoke(key);
     }
-
+    public void DeleteKey(string key)
+    {
+        _writer.DeleteKey(key);
+    }
     public void AddTickets(int count)
     {
         int own = 0;

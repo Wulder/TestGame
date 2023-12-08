@@ -12,8 +12,10 @@ public class AudioManager : MonoBehaviour
     public bool IsMusicOn => _isMusicOn;
     public bool IsSoundsOn => _isSoundsOn;
 
-    [SerializeField] private AudioSource _musicSrc;
-    [SerializeField] private float _musicVolume;
+    [SerializeField] private AudioSource _musicSrc, _soundSrc;
+    [SerializeField] private float _musicVolume, _soundsVolume;
+
+    
 
     private void Awake()
     {
@@ -23,9 +25,13 @@ public class AudioManager : MonoBehaviour
         Init();
     }
     
-
+    
     void Init()
     {
+
+        if (!PlayerPrefs.HasKey("music")) PlayerPrefs.SetInt("music",1);
+        if (!PlayerPrefs.HasKey("sound")) PlayerPrefs.SetInt("sound",1);
+
         if (PlayerPrefs.GetInt("music") > 0)
             TurnOnMusic();
         else
@@ -46,7 +52,7 @@ public class AudioManager : MonoBehaviour
 
     public void TurnOffSounds()
     {
-        
+        _soundSrc.volume = 0;
         PlayerPrefs.SetInt("sounds", 0);
         _isSoundsOn = false;
     }
@@ -60,8 +66,15 @@ public class AudioManager : MonoBehaviour
 
     public void TurnOnSounds()
     {
+        _soundSrc.volume = _soundsVolume;
         PlayerPrefs.SetInt("sounds", 1);
         _isSoundsOn = true;
+    }
+
+    public void PlaySound(AudioClip clip)
+    {
+        _soundSrc.clip = clip;
+        _soundSrc.Play();
     }
     
 }

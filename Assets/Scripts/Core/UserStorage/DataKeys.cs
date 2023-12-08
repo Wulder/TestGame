@@ -19,7 +19,8 @@ public class DataKeys : ScriptableObject
 
     [SerializeField] private string _lastDate;
 
-    [SerializeField] private string _firstBonusDate;
+    [SerializeField] private string _lastBonusDate;
+    [SerializeField] private string _nextBonusNumber;
 
     public string Tickets => _tickets;
     public string Character1 => _character1;
@@ -30,5 +31,6 @@ public class DataKeys : ScriptableObject
     public string Location3 => _location3;
     public string LastLvl => _lastLvl;
     public string LastDate => _lastDate;
-    public string FirstBonusDate => _firstBonusDate;
+    public string LastBonusDate => _lastBonusDate;
+    public string NextBonusNumber => _nextBonusNumber;
 }

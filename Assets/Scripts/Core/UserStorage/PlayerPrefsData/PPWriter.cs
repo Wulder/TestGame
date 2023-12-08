@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class PPWriter : IUserDataWriter
 {
+    public void DeleteKey(string key)
+    {
+       PlayerPrefs.DeleteKey(key);
+    }
+
     public bool Write<T>(string key, T value)
     {
         switch (Type.GetTypeCode(typeof(T)))

@@ -22,3 +22,5 @@ MonoBehaviour:
   _lastLvl: d_lvl
   _lastDate: d_date
   _firstBonusDate: d_firstBonus
+  _lastBonusDate: d_lastBonus
+  _currentBonus: d_currentBonus

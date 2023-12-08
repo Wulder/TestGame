@@ -5,4 +5,6 @@ using UnityEngine;
 public interface IUserDataWriter 
 {
     public bool Write<T>(string key, T value);
+
+    public void DeleteKey(string key);
 }

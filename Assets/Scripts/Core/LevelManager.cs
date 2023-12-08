@@ -1,6 +1,4 @@
-
 using System.Diagnostics;
-using UnityEditor;
 using UnityEngine.SceneManagement;
 
 public class LevelManager : Singletone<LevelManager>
@@ -11,8 +9,10 @@ public class LevelManager : Singletone<LevelManager>
     public int CurrentLvl => _currentLvl;
     private int _currentLvl = 0;
 
-    private SceneAsset _menuScene, _levelScene;
-    public LevelManager(SceneAsset menu, SceneAsset level)
+
+    private string _menuScene, _levelScene;
+
+    public LevelManager(string menu, string level)
     {
         _menuScene = menu;
         _levelScene = level;
@@ -26,7 +26,7 @@ public class LevelManager : Singletone<LevelManager>
     public void LoadLevel(int lvlNum)
     {
         _currentLvl = lvlNum;
-        SceneManager.LoadScene(_levelScene.name);
+        SceneManager.LoadScene(_levelScene);
     }
 
     public void FinishLevel()
@@ -35,7 +35,7 @@ public class LevelManager : Singletone<LevelManager>
          SetLastLevel(_currentLvl + 1);
         _currentLvl = 0;
         Debug.WriteLine($"You success complete {_currentLvl} level!");
-        SceneManager.LoadScene(_menuScene.name);
+        SceneManager.LoadScene(_menuScene);
     }
 
     public void SetLastLevel(int lvl)
