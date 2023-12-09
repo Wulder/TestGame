@@ -25,7 +25,13 @@ public class GameManager : MonoBehaviour
         if(instance == null)
             instance = this;
         else
-            Destroy(this);
+        {
+            Destroy(gameObject);
+            return;
+        }
+            
+
+        
 
         UserData ud = new UserData(new PPReader(), new PPWriter(), _keys);
         InternalStore ins = new InternalStore();

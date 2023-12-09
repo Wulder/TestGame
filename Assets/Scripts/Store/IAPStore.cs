@@ -7,16 +7,7 @@ using UnityEngine.Purchasing;
 public class IAPStore : MonoBehaviour
 {
     [SerializeField] private OnPurchaseView _view;
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 
     public void OnPurchaseProduct(Product product)
     {

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,7 +14,7 @@ public class InternalStoreButton : MonoBehaviour
     [SerializeField] private string _key;
     [SerializeField] private int _value;
     [SerializeField] private int _lvlLimitation;
-    [SerializeField] private InternalStoreLogic _store;
+    
 
     [Header("View")]
     [SerializeField] private TextMeshProUGUI _priceText;
@@ -37,9 +38,18 @@ public class InternalStoreButton : MonoBehaviour
     private void Awake()
     {
         _button = GetComponent<Button>();
-        _button.onClick.AddListener(Buy);
+    }
 
-       
+    private void OnEnable()
+    {
+        _button.onClick.AddListener(Buy);
+        UserData.Instance.OnDataUpdated += UpdateState;
+    }
+
+    private void OnDisable()
+    {
+        _button.onClick.RemoveListener(Buy);
+        UserData.Instance.OnDataUpdated -= UpdateState;
     }
 
     private void Start()
@@ -50,6 +60,7 @@ public class InternalStoreButton : MonoBehaviour
     void Init()
     {
         _button.interactable = false;
+        UserData.Instance.Read<int>(UserData.Instance.Keys.Tickets, out int ticketsCount);
         int result = 0;
         if (UserData.Instance.Read<int>(_key, out result))
         {
@@ -69,7 +80,7 @@ public class InternalStoreButton : MonoBehaviour
             _lvlLimitationText.gameObject.SetActive(false);
             return;
         }
-        else
+        else if(ticketsCount >= _price)
         {
             _purchasedContent.SetActive(false);
             _priceContent.SetActive(true);
@@ -94,8 +105,17 @@ public class InternalStoreButton : MonoBehaviour
     [ContextMenu("Buy")]
     private void Buy()
     {
-        _store.Buy<int>(_price, _key, _value);
+        InternalStoreLogic.Instance.Buy<int>(_price, _key, _value);
         Init();
-
     }
+
+    void UpdateState(string key)
+    {
+        var keys = UserData.Instance.Keys;
+
+        if (key == keys.Tickets)
+            Init();
+            
+    }
+
 }

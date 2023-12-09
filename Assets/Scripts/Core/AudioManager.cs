@@ -30,7 +30,7 @@ public class AudioManager : MonoBehaviour
     {
 
         if (!PlayerPrefs.HasKey("music")) PlayerPrefs.SetInt("music",1);
-        if (!PlayerPrefs.HasKey("sound")) PlayerPrefs.SetInt("sound",1);
+        if (!PlayerPrefs.HasKey("sounds")) PlayerPrefs.SetInt("sounds",1);
 
         if (PlayerPrefs.GetInt("music") > 0)
             TurnOnMusic();

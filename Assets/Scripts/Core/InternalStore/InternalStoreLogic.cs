@@ -5,8 +5,15 @@ using UnityEngine;
 
 public class InternalStoreLogic : MonoBehaviour
 {
-
+    private static InternalStoreLogic instance;
+    public static InternalStoreLogic Instance => instance;  
     private InternalStore _store;
+
+    private void Awake()
+    {
+        if (instance == null) instance = this;
+        else Destroy(gameObject);
+    }
     private void Start()
     {
         _store = InternalStore.Instance;
